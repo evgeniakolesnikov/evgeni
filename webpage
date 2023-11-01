@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Input Page</title>
+    <style>
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="inputNumber(1)">1</button>
+    <button onclick="inputNumber(2)">2</button>
+    <button onclick="inputNumber(3)">3</button>
+    <!-- Add more buttons as needed -->
+    
+    <script>
+        function inputNumber(number) {
+            // Send the number to Google Sheets via an API endpoint
+            sendDataToGoogleSheets(number);
+        }
+
+        function sendDataToGoogleSheets(data) {
+            var url = 'YOUR_APPS_SCRIPT_URL'; // Replace with your Google Apps Script URL
+
+            fetch(url, {
+                method: 'POST',
+                body: 'data=' + data,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Data sent to Google Sheets');
+                } else {
+                    alert('Failed to send data');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
